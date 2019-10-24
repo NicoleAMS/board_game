@@ -18,6 +18,17 @@ class Grid {
             }
         }
     }
+    addObstacles() {
+        let selectedTiles = [];
+        let remainingTiles = this.tiles.slice(0);
+        for (let n = 0; n < this.numberOfObstacles; n++) {
+            let randomIndex = Math.floor(Math.random() * remainingTiles.length);
+            let blockedTile = remainingTiles[randomIndex];
+            blockedTile.blocked = true;
+            selectedTiles.push(blockedTile);
+            remainingTiles.splice(randomIndex, 1);
+        }
+    }
 }
 
 function displayGrid(grid) {
@@ -27,8 +38,12 @@ function displayGrid(grid) {
     for (row in grid.map) {
         for (column in grid.map[row]) {
             let tile = grid.map[row][column].tile;
+            let hasObstacle = tile.blocked;
             let tileDiv = document.createElement("div");
             tileDiv.classList.add("tile", "row_" + tile.y);
+            if (hasObstacle) {
+                tileDiv.classList.add("obstacle");
+            }
             gameCanvas.appendChild(tileDiv);
         }
     }
@@ -36,6 +51,7 @@ function displayGrid(grid) {
 
 const grid = new Grid(15, 15);
 grid.init();
+grid.addObstacles();
 
 
 displayGrid(grid);

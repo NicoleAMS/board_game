@@ -10,3 +10,7 @@
     border: 1px solid palevioletred;
     box-sizing: border-box;
 }
+
+.obstacle {
+    background-color: palevioletred;
+}
