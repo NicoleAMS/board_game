@@ -22,14 +22,14 @@ const ringOfSolaria = new Weapon(
 const iceCrystal = new Weapon(
   (name = "Ice Crystal"),
   (damage = 8),
-  (colour = "blue"),
+  (colour = "lightblue"),
   (type = "ice")
 );
 const autumnWind = new Weapon(
   (name = "Autumn Wind"),
   (damage = 7),
-  (colour = "brown"),
-  (type = "air")
+  (colour = "green"),
+  (type = "nature")
 );
 
 const weapons = [dragonFlame, ringOfSolaria, iceCrystal, autumnWind];
