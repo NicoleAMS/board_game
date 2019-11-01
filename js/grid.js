@@ -57,7 +57,7 @@ class Grid {
 
 function displayGrid(grid) {
   const gameCanvas = document.getElementById("game");
-  gameCanvas.style.width = `${grid.gridWidth * 60}px`;
+  gameCanvas.style.width = `${grid.gridWidth * 80}px`;
 
   for (row in grid.map) {
     for (column in grid.map[row]) {
@@ -78,12 +78,16 @@ function displayGrid(grid) {
         tileDiv.classList.add("obstacle");
       }
       if (hasWeapon) {
-        tileDiv.classList.add("weapon");
-        tileDiv.style.backgroundColor = tile.items[0].colour;
+        let weaponDiv = document.createElement("img");
+        weaponDiv.src = tile.items[0].image;
+        weaponDiv.classList.add("weapon");
+				tileDiv.appendChild(weaponDiv);
 			}
 			if (hasPlayer) {
-				tileDiv.classList.add("player");
-				tileDiv.style.backgroundColor = "black";
+        let gamePiece = document.createElement("img");
+        gamePiece.src = tile.items[0].character.image;
+				gamePiece.classList.add("gamepiece");
+        tileDiv.appendChild(gamePiece);
 			}
       gameCanvas.appendChild(tileDiv);
     }

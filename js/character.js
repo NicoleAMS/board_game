@@ -1,10 +1,11 @@
 class Character {
-  constructor(name, klass, type, weapon) {
+  constructor({name, klass, type, weapon, image}) {
     this.name = name;
     this.klass = klass;
     this.type = type;
     this.health = 100;
     this.weapon = weapon;
+    this.image = image;
   }
 }
 
@@ -16,8 +17,9 @@ const bloom = new Character(
     (name = "Fire Blast"),
     (damage = 5),
     (colour = "orange"),
-    (type = "fire")
-  ))
+    (type = "fire"),
+  )),
+  (image = "./assets/images/bloom.png")
 );
 
 const stella = new Character(
@@ -28,8 +30,9 @@ const stella = new Character(
     (name = "Solar Burst"),
     (damage = 5),
     (colour = "yellow"),
-    (type = "light")
-  ))
+    (type = "light"),
+  )),
+  (image = "./assets/images/stella.png")
 );
 
 const flora = new Character(
@@ -40,8 +43,9 @@ const flora = new Character(
     (name = "Floral Whirlpool"),
     (damage = 5),
     (colour = "green"),
-    (type = "nature")
-  ))
+    (type = "nature"),
+  )),
+  (image = "./assets/images/flora.png")
 );
 
 const icy = new Character(
@@ -52,8 +56,9 @@ const icy = new Character(
     (name = "Ice Attack"),
     (damage = 5),
     (colour = "lightblue"),
-    (type = "ice")
-  ))
+    (type = "ice"),
+  )),
+  (image = "./assets/images/icy.png")
 );
 
 const darcy = new Character(
@@ -64,8 +69,9 @@ const darcy = new Character(
     (name = "Vertigo"),
     (damage = 5),
     (colour = "purple"),
-    (type = "darkness")
-  ))
+    (type = "darkness"),
+  )),
+  (image = "./assets/images/darcy.png")
 );
 
 const stormy = new Character(
@@ -76,8 +82,9 @@ const stormy = new Character(
     (name = "Lightning Flash"),
     (damage = 5),
     (colour = "bordeaux"),
-    (type = "storms")
-  ))
+    (type = "storms"),
+  )),
+  (image = "./assets/images/stormy.png")
 );
 
 const fairies = [bloom, stella, flora];
