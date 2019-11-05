@@ -1,3 +1,6 @@
+let gameMap = [];
+let freeTiles = [];
+
 // WEAPONS
 
 const dragonFlame = new Weapon({
@@ -14,7 +17,7 @@ const ringOfSolaria = new Weapon({
   type: "light",
   image: "./assets/images/ring.png"
 });
-const autumnWind = new Weapon({
+const lilo = new Weapon({
   name: "Lilo",
   damage: 7,
   colour: "green",
@@ -30,7 +33,7 @@ const iceCrystal = new Weapon({
   image: "./assets/images/icy_vacuum.png"
 });
 
-const weapons = [dragonFlame, ringOfSolaria, iceCrystal, autumnWind];
+const weapons = [dragonFlame, ringOfSolaria, iceCrystal, lilo];
 
 // CHARACTERS
 

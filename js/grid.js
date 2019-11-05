@@ -3,62 +3,42 @@ class Grid {
     this.gridWidth = gridWidth;
     this.gridHeight = gridHeight;
     this.numberOfObstacles = Math.floor(gridWidth * gridHeight * 0.2);
-    this.weapons = [];
-    this.map = [];
-		this.tiles = [];
   }
 
-  init() {
+  init(map, tiles) {
     for (let y = 0; y < this.gridHeight; y++) {
-      this.map.push([]);
+      map.push([]);
       for (let x = 0; x < this.gridWidth; x++) {
         let tile = new Tile(x, y);
-        this.tiles.push(tile);
-        this.map[y].push({
+        tiles.push(tile);
+        map[y].push({
           tile: tile
         });
       }
     }
-		this.weapons.push(weapons);
   }
 
-  addObstacles() {
-    for (let n = 0; n < this.numberOfObstacles; n++) {
-      let randomIndex = Math.floor(Math.random() * this.tiles.length);
-      let blockedTile = this.tiles[randomIndex];
-      blockedTile.blocked = true;
-      this.tiles.splice(randomIndex, 1);
+  addItem(item, tiles, obstacle) {
+    let randomIndex = Math.floor(Math.random() * tiles.length);
+    let chosenTile = tiles[randomIndex];
+    if (item === obstacle) {
+      chosenTile.blocked = true;
+    } else {
+      chosenTile.items.push(item);
+      item.tile = chosenTile;
     }
+    tiles.splice(randomIndex, 1);
   }
 
-  addWeapons() {
-    for (let n = 0; n < this.weapons[0].length; n++) {
-      let randomIndex = Math.floor(Math.random() * this.tiles.length);
-      let tile = this.tiles[randomIndex];
-			tile.items.push(this.weapons[0][n]);
-			this.tiles.splice(randomIndex, 1);
-    }
-	}
-	
-	addPlayers(players) {
-		for (let i = 0; i < players.length; i++) {
-			let randomIndex = Math.floor(Math.random() * this.tiles.length);
-			let tile = this.tiles[randomIndex];
-      players[i].tile = tile;
-			tile.items.push(players[i]);
-			console.log(players[i]);
-			this.tiles.splice(randomIndex, 1);
-		}
-	}
 }
 
-function displayGrid(grid) {
+function displayGrid(grid, map) {
   const gameCanvas = document.getElementById("game");
   gameCanvas.style.width = `${grid.gridWidth * 80}px`;
 
-  for (row in grid.map) {
-    for (column in grid.map[row]) {
-      let tile = grid.map[row][column].tile;
+  for (row in map) {
+    for (column in map[row]) {
+      let tile = map[row][column].tile;
       let hasObstacle = tile.blocked;
 			let hasWeapon = false;
 			let hasPlayer = false;
@@ -90,11 +70,3 @@ function displayGrid(grid) {
     }
   }
 }
-
-const grid = new Grid(10, 10);
-grid.init();
-grid.addObstacles();
-grid.addWeapons();
-grid.addPlayers(players);
-displayGrid(grid);
-console.log(grid.map);
