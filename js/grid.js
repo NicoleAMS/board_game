@@ -40,16 +40,13 @@ class Grid {
     }
 	}
 	
-	addPlayers(number = 2) {
-		for (let n = 0; n < number; n++) {
+	addPlayers(players) {
+		for (let i = 0; i < players.length; i++) {
 			let randomIndex = Math.floor(Math.random() * this.tiles.length);
 			let tile = this.tiles[randomIndex];
-			let character = n === 0 ? 
-				fairies[Math.floor(Math.random() * fairies.length)] : 
-				witches[Math.floor(Math.random() * witches.length)];
-			let player = new Player(character, tile);
-			tile.items.push(player);
-			console.log(player);
+      players[i].tile = tile;
+			tile.items.push(players[i]);
+			console.log(players[i]);
 			this.tiles.splice(randomIndex, 1);
 		}
 	}
@@ -98,6 +95,6 @@ const grid = new Grid(10, 10);
 grid.init();
 grid.addObstacles();
 grid.addWeapons();
-grid.addPlayers();
+grid.addPlayers(players);
 displayGrid(grid);
 console.log(grid.map);
