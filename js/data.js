@@ -1,6 +1,11 @@
 let gameMap = [];
 let freeTiles = [];
 
+// OBSTACLE
+const obstacle = new Obstacle(
+	image = "./assets/images/rock.png"
+);
+
 // WEAPONS
 
 const dragonFlame = new Weapon({
