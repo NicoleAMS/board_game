@@ -18,15 +18,27 @@ class Grid {
     }
   }
 
-  addItem(item, tiles) {
-    let randomIndex = Math.floor(Math.random() * tiles.length);
-    let chosenTile = tiles[randomIndex];
+  addItem(item, tiles, index) {
+    // let randomIndex = Math.floor(Math.random() * tiles.length);
+    let chosenTile = tiles[index];
     if (item instanceof Obstacle || item instanceof Player) {
       chosenTile.blocked = true;
     }
     chosenTile.items.push(item);
     item.tile = chosenTile;
-    tiles.splice(randomIndex, 1);
+    tiles.splice(index, 1);
+  }
+
+  removeItem(item, tiles) {
+    let tile = item.tile;
+    console.log(tile.items[0]);
+  //   tile.items.splice(0, 1);
+  //   let element = document.getElementsByClassName("row_" + tile.y + "_col_" + tile.x)[0];
+  //   console.log(element);
+  //   displayTile(element, tile);
+  //   console.log(tiles);
+  //   tiles.push(tile);
+  //   console.log(tiles);
   }
 
 }
@@ -38,7 +50,8 @@ function displayGrid(grid, map) {
   for (row in map) {
     for (column in map[row]) {
       let tile = map[row][column].tile;
-      let tileDiv = createElement("div", ["tile", "row_" + tile.y]);
+      let id = `x${tile.x}_y${tile.y}`;
+      let tileDiv = createElement("div", id, ["tile", "row_" + tile.y + "_col_" + tile.x]);
       tileDiv = displayTile(tileDiv, tile);
       gameCanvas.appendChild(tileDiv);
     }
@@ -48,8 +61,10 @@ function displayGrid(grid, map) {
 function displayTile(tileEl, tile) {
   let className;
   let source;
+  let id;
   for (item in tile.items) {
     className = tile.items[item].constructor.name.toLowerCase();
+    id = tile.items[item].name;
   }
   if (className) {
     if (className === "obstacle") {
@@ -60,14 +75,15 @@ function displayTile(tileEl, tile) {
     } else {
       source = tile.items[0].image;
     }
-    let image = createElement("img", [className], source);
+    let image = createElement("img", id, [className], source);
     tileEl.appendChild(image);
   }
   return tileEl;
 }
 
-function createElement(el, classNames, source) {
+function createElement(el, id, classNames, source) {
   let element = document.createElement(el);
+  element.id = id;
   for (i = 0; i < classNames.length; i++) {
     element.classList.add(classNames[i]);
   } if (source) {
@@ -75,46 +91,3 @@ function createElement(el, classNames, source) {
   }
   return element;
 }
-
-
-
-// function displayGrid(grid, map) {
-//   const gameCanvas = document.getElementById("game");
-//   gameCanvas.style.width = `${grid.gridWidth * 80}px`;
-//   console.log(Weapon.name.toLowerCase());
-
-//   for (row in map) {
-//     for (column in map[row]) {
-//       let tile = map[row][column].tile;
-//       let hasObstacle = tile.blocked;
-// 			let hasWeapon = false;
-// 			let hasPlayer = false;
-//       for (item in tile.items) {
-//         console.log(tile.items[item].constructor.name.toLowerCase());
-//         if (tile.items[item] instanceof Weapon) {
-//           hasWeapon = true;
-//         } else if (tile.items[item] instanceof Player) {
-// 					hasPlayer = true;
-// 				}
-//       }
-//       let tileDiv = document.createElement("div");
-//       tileDiv.classList.add("tile", "row_" + tile.y);
-//       if (hasObstacle) {
-//         tileDiv.classList.add("obstacle");
-//       }
-//       if (hasWeapon) {
-//         let weaponDiv = document.createElement("img");
-//         weaponDiv.src = tile.items[0].image;
-//         weaponDiv.classList.add("weapon");
-// 				tileDiv.appendChild(weaponDiv);
-// 			}
-// 			if (hasPlayer) {
-//         let gamePiece = document.createElement("img");
-//         gamePiece.src = tile.items[0].character.image;
-// 				gamePiece.classList.add("gamepiece");
-//         tileDiv.appendChild(gamePiece);
-// 			}
-//       gameCanvas.appendChild(tileDiv);
-//     }
-//   }
-// }

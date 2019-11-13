@@ -1,25 +1,34 @@
-const grid = new Grid(10, 10);
-grid.init(gameMap, freeTiles);
+// const grid = new Grid(10, 10);
 
-// grid.addObstacles();
-for (let n = 0; n < grid.numberOfObstacles; n++) {
-    grid.addItem(obstacle, freeTiles);
+function startGame() {
+	// initializes the grid
+  grid.init(gameMap, freeTiles);
+
+  // adds obstacles
+  for (let n = 0; n < grid.numberOfObstacles; n++) {
+    grid.addItem(obstacle, freeTiles, getRandomIndex(freeTiles));
+  }
+
+  // adds weapons
+  for (let n = 0; n < weapons.length; n++) {
+    grid.addItem(weapons[n], freeTiles, getRandomIndex(freeTiles));
+  }
+
+  // adds players / characters
+  for (let n = 0; n < players.length; n++) {
+    grid.addItem(players[n], freeTiles, getRandomIndex(freeTiles));
+  }
+
+  displayGrid(grid, gameMap);
 }
 
-// grid.addWeapons();
-for (let n = 0; n < weapons.length; n++) {
-    grid.addItem(weapons[n], freeTiles);
+function getRandomIndex(array) {
+  let randomIndex = Math.floor(Math.random() * array.length);
+  return randomIndex;
 }
 
-// grid.addPlayers(players);
-for (let n = 0; n < players.length; n++) {
-    grid.addItem(players[n], freeTiles);
-}
-
-displayGrid(grid, gameMap);
-
-
-
+startGame();
+// grid.removeItem(player1, freeTiles);
 
 console.log(gameMap);
 console.log(grid);
