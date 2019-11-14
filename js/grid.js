@@ -3,14 +3,16 @@ class Grid {
     this.gridWidth = gridWidth;
     this.gridHeight = gridHeight;
     this.numberOfObstacles = Math.floor(gridWidth * gridHeight * 0.2);
+    this.tiles = [];
   }
 
   init(map, tiles) {
     for (let x = 0; x < this.gridHeight; x++) {
       map.push([]);
       for (let y = 0; y < this.gridWidth; y++) {
-        let tile = new Tile(x, y);
+        let tile = new Tile(x + "_" + y, x, y);
         tiles.push(tile);
+        this.tiles.push(tile);
         map[x].push({
           tile: tile
         });
@@ -19,7 +21,6 @@ class Grid {
   }
 
   addItem(item, tiles, index) {
-    // let randomIndex = Math.floor(Math.random() * tiles.length);
     let chosenTile = tiles[index];
     if (item instanceof Obstacle || item instanceof Player) {
       chosenTile.blocked = true;
@@ -29,9 +30,9 @@ class Grid {
     tiles.splice(index, 1);
   }
 
-  removeItem(item, tiles) {
-    let tile = item.tile;
-    console.log(tile.items[0]);
+  // removeItem(item, tiles) {
+  //   let tile = item.tile;
+  //   console.log(tile.items[0]);
   //   tile.items.splice(0, 1);
   //   let element = document.getElementsByClassName("row_" + tile.y + "_col_" + tile.x)[0];
   //   console.log(element);
@@ -39,9 +40,10 @@ class Grid {
   //   console.log(tiles);
   //   tiles.push(tile);
   //   console.log(tiles);
-  }
+  // }
 
 }
+
 
 function displayGrid(grid, map) {
   const gameCanvas = document.getElementById("game");

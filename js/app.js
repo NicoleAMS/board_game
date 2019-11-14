@@ -6,7 +6,7 @@ function startGame() {
 
   // adds obstacles
   for (let n = 0; n < grid.numberOfObstacles; n++) {
-    grid.addItem(obstacle, freeTiles, getRandomIndex(freeTiles));
+    grid.addItem(obstacles[n], freeTiles, getRandomIndex(freeTiles));
   }
 
   // adds weapons
@@ -31,4 +31,6 @@ startGame();
 // grid.removeItem(player1, freeTiles);
 
 console.log(gameMap);
-console.log(grid);
+player1.setAvailableMoves(directions);
+player2.setAvailableMoves(directions);
+

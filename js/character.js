@@ -1,5 +1,6 @@
 class Character {
-  constructor({name, klass, type, image, weapon}) {
+  constructor({id, name, klass, type, image, weapon}) {
+    this.id = id;
     this.name = name;
     this.klass = klass;
     this.type = type;

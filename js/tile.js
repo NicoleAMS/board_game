@@ -1,7 +1,10 @@
 class Tile {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(id, x, y) {
+    this.id = id;
+    // this.x = x;
+    // this.y = y;
+    this.location = [x, y];
+    this.availableTiles = [];
     this.blocked = false;
     this.items = [];
   }
