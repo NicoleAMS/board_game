@@ -5,7 +5,7 @@ console.log(gameMap);
 player1.setPossibleMoves(directions);
 player2.setPossibleMoves(directions);
 
-console.log(player2);
+console.log(player1, player2);
 
 const gameDiv = document.getElementById("game");
 gameDiv.addEventListener("click", function(event) {

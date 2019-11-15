@@ -14,3 +14,10 @@ function createElement(el, id, classNames, source) {
   }
   return element;
 }
+
+function getPosition(x, y) {
+  return {
+    x: x,
+    y: y
+  };
+}

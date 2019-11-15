@@ -160,10 +160,21 @@ const player2 = new Player(
 
 const players = [player1, player2];
 
-// change array to object with x & y
 const directions = {
-  "n": [-1, 0],
-  "e": [0, 1],
-  "s": [1, 0],
-  "w": [0, -1]
+  n: {
+    x: -1,
+    y: 0
+  },
+  e: {
+    x: 0,
+    y: 1
+  },
+  s: {
+    x: 1,
+    y: 0
+  },
+  w: {
+    x: 0,
+    y: -1
+  }
 };

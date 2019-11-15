@@ -9,36 +9,35 @@ class Player {
   setPossibleMoves(directions) {
     this.possibleMoves = [];
     for (const dir in directions) {
-      let newTileXY;
-      let tile;
-			let currentPosition = this.tile.location;
+      let currentPosition = getPosition(this.tile.x, this.tile.y);
+      let nextPosition;
+			let tile;
+			let tileID;
       for (let n = 0; n < 3; n++) {
-				// write helper function
-        newTileXY = [
-          currentPosition[0] + directions[dir][0],
-          currentPosition[1] + directions[dir][1]
-        ];
-        let tileId = newTileXY[0] + "_" + newTileXY[1];
+        nextPosition = getPosition(
+          currentPosition.x + directions[dir].x,
+          currentPosition.y + directions[dir].y
+        );
+        tileID = nextPosition.x + "_" + nextPosition.y;
         tile = grid.tiles.find(tile => {
-          return tile.id === tileId;
+          return tile.id === tileID;
         });
         if (tile !== undefined && !tile.blocked) {
           this.possibleMoves.push(tile);
         } else {
           break;
         }
-        currentPosition = newTileXY;
+        currentPosition = nextPosition;
       }
     }
-    // console.log(this);
   }
 
   checkMove(event) {
-		let tile;
-		let validMove = false;
+    let tile;
+    let validMove = false;
     for (let n = 0; n < this.possibleMoves.length; n++) {
-			tile = this.possibleMoves[n];
-			// check the element's id or (if img with weapon) the parent's id
+      tile = this.possibleMoves[n];
+      // check the element's id or (if img with weapon) the parent's id
       if (tile.id === event.target.id || tile.id === event.path[1].id) {
         validMove = true;
         break;
@@ -47,16 +46,16 @@ class Player {
       }
     }
     if (validMove) {
-			return tile;
+      return tile;
     }
-	}
-	
-	move(fromTile, toTile) {
-		console.log(fromTile, toTile);
-		// remove player from fromTile's items
-		// add player to toTile's items 
-		this.tile = toTile;
-		this.setPossibleMoves(directions);
-		console.log(this);
-	}
+  }
+
+  move(fromTile, toTile) {
+    console.log(fromTile, toTile);
+    // remove player from fromTile's items
+    // add player to toTile's items
+    this.tile = toTile;
+    this.setPossibleMoves(directions);
+    console.log(this);
+  }
 }
