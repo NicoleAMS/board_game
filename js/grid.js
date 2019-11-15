@@ -52,8 +52,8 @@ function displayGrid(grid, map) {
   for (row in map) {
     for (column in map[row]) {
       let tile = map[row][column].tile;
-      let id = `x${tile.x}_y${tile.y}`;
-      let tileDiv = createElement("div", id, ["tile", "row_" + tile.y + "_col_" + tile.x]);
+      let id = `${tile.x}_${tile.y}`;
+      let tileDiv = createElement("div", id, ["tile"]);
       tileDiv = displayTile(tileDiv, tile);
       gameCanvas.appendChild(tileDiv);
     }
@@ -64,6 +64,7 @@ function displayTile(tileEl, tile) {
   let className;
   let source;
   let id;
+  // empty tileEl
   for (item in tile.items) {
     className = tile.items[item].constructor.name.toLowerCase();
     id = tile.items[item].name;
@@ -83,13 +84,13 @@ function displayTile(tileEl, tile) {
   return tileEl;
 }
 
-function createElement(el, id, classNames, source) {
-  let element = document.createElement(el);
-  element.id = id;
-  for (i = 0; i < classNames.length; i++) {
-    element.classList.add(classNames[i]);
-  } if (source) {
-    element.src = source;
-  }
-  return element;
-}
+// function createElement(el, id, classNames, source) {
+//   let element = document.createElement(el);
+//   element.id = id;
+//   for (i = 0; i < classNames.length; i++) {
+//     element.classList.add(classNames[i]);
+//   } if (source) {
+//     element.src = source;
+//   }
+//   return element;
+// }
