@@ -51,11 +51,12 @@ class Player {
   }
 
   move(fromTile, toTile) {
-    console.log(fromTile, toTile);
-    // remove player from fromTile's items
-    // add player to toTile's items
+    grid.removeItem(this);
+    grid.addItem(this, toTile);
     this.tile = toTile;
     this.setPossibleMoves(directions);
     console.log(this);
+    console.log(fromTile, toTile);
   }
 }
+
