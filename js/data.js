@@ -1,8 +1,9 @@
 const grid = new Grid(10, 10);
-let gameMap = [];
-let freeTiles = [];
+// let gameMap = [];
+// let freeTiles = [];
 
 // OBSTACLE
+
 let obstacles = [];
 for (let n = 0; n < grid.numberOfObstacles; n++) {
   const obstacle = new Obstacle(
@@ -159,6 +160,9 @@ const player2 = new Player(
 );
 
 const players = [player1, player2];
+
+
+// DIRECTIONS 
 
 const directions = {
   n: {

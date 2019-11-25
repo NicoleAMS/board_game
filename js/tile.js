@@ -4,7 +4,6 @@ class Tile {
     this.x = x;
     this.y = y;
     this.location = [x, y];
-    this.availableTiles = [];
     this.blocked = false;
     this.items = [];
   }

@@ -1,7 +1,6 @@
 startGame();
-// grid.removeItem(player1, freeTiles);
 
-console.log(gameMap);
+console.log(grid.map);
 player1.setPossibleMoves(directions);
 player2.setPossibleMoves(directions);
 
