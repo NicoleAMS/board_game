@@ -64,7 +64,8 @@ const bloom = new Character({
     name: "Fire Blast",
     damage: 5,
     colour: "orange",
-    type: "fire"
+    type: "fire",
+    image: "./assets/images/fire_blast.png"
   })
 });
 
@@ -79,7 +80,8 @@ const stella = new Character({
     name: "Solar Burst",
     damage: 5,
     colour: "yellow",
-    type: "light"
+    type: "light",
+    image: "./assets/images/solar_burst.png"
   })
 });
 
@@ -94,7 +96,8 @@ const flora = new Character({
     name: "Floral Whirlpool",
     damage: 5,
     colour: "green",
-    type: "nature"
+    type: "nature",
+    image: "./assets/images/floral_whirlpool.png"
   })
 });
 
@@ -109,7 +112,8 @@ const icy = new Character({
     name: "Ice Attack",
     damage: 5,
     colour: "lightblue",
-    type: "ice"
+    type: "ice",
+    image: "./assets/images/ice_attack.png"
   })
 });
 
@@ -124,7 +128,8 @@ const darcy = new Character({
     name: "Vertigo",
     damage: 5,
     colour: "purple",
-    type: "darkness"
+    type: "darkness",
+    image: "assets/images/vertigo.png"
   })
 });
 
@@ -139,7 +144,8 @@ const stormy = new Character({
     name: "Lightning Flash",
     damage: 5,
     colour: "bordeaux",
-    type: "storms"
+    type: "storms",
+    image: "assets/images/lightning.png"
   })
 });
 
