@@ -5,12 +5,13 @@ let player;
 let turn = true;
 
 gameDiv.addEventListener("click", function(event) {
-
   if (turn) {
     player = player1;
   } else {
     player = player2;
   }
+
+  player.setPossibleMoves(directions);
 
   const validTile = player.checkMove(event);
   if (validTile) {
@@ -22,7 +23,7 @@ gameDiv.addEventListener("click", function(event) {
 
     const previousTile = player.tile;
 
-    player.move(grid, previousTile, validTile);
+    player.move(grid, validTile);
     if (previousTile.items[0] instanceof Weapon) {
       displayTile(fromTileEl, previousTile, "");
     } else {

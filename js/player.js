@@ -6,14 +6,14 @@ class Player {
     this.possibleMoves = [];
   }
 
-  setPossibleMoves(directions) {
+  setPossibleMoves(directions, steps=3) {
     this.possibleMoves = [];
     for (const dir in directions) {
       let currentPosition = getPosition(this.tile.x, this.tile.y);
       let nextPosition;
 			let tile;
 			let tileID;
-      for (let n = 0; n < 3; n++) {
+      for (let n = 0; n < steps; n++) {
         nextPosition = getPosition(
           currentPosition.x + directions[dir].x,
           currentPosition.y + directions[dir].y
@@ -29,7 +29,7 @@ class Player {
         }
         currentPosition = nextPosition;
       }
-    }
+		}
   }
 
   checkMove(event) {
@@ -50,13 +50,10 @@ class Player {
     }
   }
 
-  move(grid, fromTile, toTile) {
+  move(grid, toTile) {
     grid.removeItem(this);
     grid.addItem(this, toTile);
     this.tile = toTile;
-    this.setPossibleMoves(directions);
-    console.log(this);
-    console.log(fromTile, toTile);
   }
 }
 
