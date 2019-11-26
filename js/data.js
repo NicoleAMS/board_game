@@ -18,7 +18,7 @@ for (let n = 0; n < grid.numberOfObstacles; n++) {
 const dragonFlame = new Weapon({
   id: "dragonFlame",
   name: "Dragon Flame",
-  damage: 10,
+  damage: 20,
   colour: "orange",
   type: "fire",
   image: "./assets/images/dragon.png"
@@ -26,7 +26,7 @@ const dragonFlame = new Weapon({
 const ringOfSolaria = new Weapon({
   id: "ringOfSolaria",
   name: "Ring of Solaria",
-  damage: 9,
+  damage: 16,
   colour: "yellow",
   type: "light",
   image: "./assets/images/ring.png"
@@ -34,7 +34,7 @@ const ringOfSolaria = new Weapon({
 const lilo = new Weapon({
   id: "lilo",
   name: "Lilo",
-  damage: 7,
+  damage: 14,
   colour: "green",
   type: "nature",
   image: "./assets/images/lilo.png"
@@ -43,7 +43,7 @@ const lilo = new Weapon({
 const iceCrystal = new Weapon({
   id: "iceVacuum",
   name: "Ice Vacuum",
-  damage: 8,
+  damage: 18,
   colour: "lightblue",
   type: "ice",
   image: "./assets/images/icy_vacuum.png"
@@ -62,7 +62,7 @@ const bloom = new Character({
   weapon: new Weapon({
     id: "fireBlast",
     name: "Fire Blast",
-    damage: 5,
+    damage: 10,
     colour: "orange",
     type: "fire",
     image: "./assets/images/fire_blast.png"
@@ -78,7 +78,7 @@ const stella = new Character({
   weapon: new Weapon({
     id: "solarBurst",
     name: "Solar Burst",
-    damage: 5,
+    damage: 10,
     colour: "yellow",
     type: "light",
     image: "./assets/images/solar_burst.png"
@@ -94,7 +94,7 @@ const flora = new Character({
   weapon: new Weapon({
     id: "floralWhirlpool",
     name: "Floral Whirlpool",
-    damage: 5,
+    damage: 10,
     colour: "green",
     type: "nature",
     image: "./assets/images/floral_whirlpool.png"
@@ -110,7 +110,7 @@ const icy = new Character({
   weapon: new Weapon({
     id: "iceAttack",
     name: "Ice Attack",
-    damage: 5,
+    damage: 10,
     colour: "lightblue",
     type: "ice",
     image: "./assets/images/ice_attack.png"
@@ -126,7 +126,7 @@ const darcy = new Character({
   weapon: new Weapon({
     id: "vertigo",
     name: "Vertigo",
-    damage: 5,
+    damage: 10,
     colour: "purple",
     type: "darkness",
     image: "assets/images/vertigo.png"
@@ -142,7 +142,7 @@ const stormy = new Character({
   weapon: new Weapon({
     id: "lightningFlash",
     name: "Lightning Flash",
-    damage: 5,
+    damage: 10,
     colour: "bordeaux",
     type: "storms",
     image: "assets/images/lightning.png"
