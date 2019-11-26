@@ -5,6 +5,7 @@ class Grid {
     this.numberOfObstacles = Math.floor(gridWidth * gridHeight * 0.2);
     this.map = [];
     this.tiles = [];
+    this.items = [];
   }
 
   initMap() {
@@ -35,6 +36,7 @@ class Grid {
     if (item instanceof Obstacle || item instanceof Player) {
       tile.blocked = true;
     }
+    this.items.push(item);
     tile.items.push(item);
     item.tile = tile;
   }
@@ -68,7 +70,6 @@ class Grid {
 }
 
 function displayTile(tileEl, tile, action) {
-  console.log(action);
   let className;
   let source;
   let id;
@@ -78,7 +79,7 @@ function displayTile(tileEl, tile, action) {
   } 
   if (action !== "remove") {
     for (item in tile.items) {
-      console.log(tile.items);
+      // console.log(tile.items);
       className = tile.items[item].constructor.name.toLowerCase();
       id = tile.items[item].id;
     }
