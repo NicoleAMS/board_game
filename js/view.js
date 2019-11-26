@@ -1,4 +1,4 @@
-function startGame() {
+function startGame(grid) {
   // initializes the grid
   grid.initMap();
 
@@ -18,7 +18,10 @@ function startGame() {
   for (let n = 0; n < players.length; n++) {
     let freeTiles = grid.getFreeTiles();
     grid.addItem(players[n], freeTiles[getRandomIndex(freeTiles)]);
-  }
+	}
+	
+	player1.setPossibleMoves(directions);
+	player2.setPossibleMoves(directions);
 
   grid.displayGrid();
 }

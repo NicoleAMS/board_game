@@ -22,9 +22,9 @@ function getPosition(x, y) {
   };
 }
 
-function swapWeapons(tile) {
+function swapWeapons(grid, tile, player) {
   const newWeapon = tile.items[0];
   grid.removeItem(tile.items[0]);
-  grid.addItem(player2.character.weapon, tile);
-  player2.character.weapon = newWeapon;
+  grid.addItem(player.character.weapon, tile);
+  player.character.weapon = newWeapon;
 }

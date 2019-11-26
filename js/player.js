@@ -50,7 +50,7 @@ class Player {
     }
   }
 
-  move(fromTile, toTile) {
+  move(grid, fromTile, toTile) {
     grid.removeItem(this);
     grid.addItem(this, toTile);
     this.tile = toTile;
