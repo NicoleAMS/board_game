@@ -54,6 +54,13 @@ class Grid {
     }
   }
 
+  swapWeapons(tile, player) {
+    const newWeapon = tile.items[0];
+    this.removeItem(tile.items[0]);
+    this.addItem(player.character.weapon, tile);
+    player.character.weapon = newWeapon;
+  }
+
   displayGrid() {
     const gameCanvas = document.getElementById("game");
     gameCanvas.style.width = `${grid.gridWidth * 80}px`;

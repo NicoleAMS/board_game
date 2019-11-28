@@ -6,8 +6,9 @@ class Player {
     this.possibleMoves = [];
   }
 
-  setPossibleMoves(directions, steps=3) {
-    this.possibleMoves = [];
+  setSurroundings(directions, steps=3) {
+		this.possibleMoves = [];
+		let surroundings = [];
     for (const dir in directions) {
       let currentPosition = getPosition(this.tile.x, this.tile.y);
       let nextPosition;
@@ -21,7 +22,10 @@ class Player {
         tileID = nextPosition.x + "_" + nextPosition.y;
         tile = grid.tiles.find(tile => {
           return tile.id === tileID;
-        });
+				});
+				if (tile !== undefined) {
+					surroundings.push(tile);
+				}
         if (tile !== undefined && !tile.blocked) {
           this.possibleMoves.push(tile);
         } else {
@@ -30,6 +34,7 @@ class Player {
         currentPosition = nextPosition;
       }
 		}
+		return surroundings;
   }
 
   checkMove(event) {

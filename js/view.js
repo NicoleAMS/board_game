@@ -21,11 +21,10 @@ function startGame(grid) {
 			let player1 = grid.items.find(item => {
 				return item.id === "player1";
 			});
-			player1.setPossibleMoves(directions, 1);
-			let tiles = player1.possibleMoves;
-			for (i = 0; i < tiles.length; i++) {
+			let directSurroundings = player1.setSurroundings(directions, 1);
+			for (i = 0; i < directSurroundings.length; i++) {
 				let tile = freeTiles.find(tile => {
-					return tile.id === tiles[i].id;
+					return tile.id === directSurroundings[i].id;
 				});
 				let index = freeTiles.indexOf(tile);
 				freeTiles.splice(index, 1);
