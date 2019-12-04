@@ -9,12 +9,13 @@ gameDiv.addEventListener("click", function click(event) {
   onPlayerTurn(player, event);
   if (fightMode) {
     gameDiv.removeEventListener("click", click);
+    displayFight(gameDiv, players);
     startFight(players);
   }
 });
 
 function startFight(players) {
-  consoleLogStats();
+  consoleLogStats(players);
   turn = !turn;
   let playerA = takeTurns(players);
   let playerD = players.find(player => {

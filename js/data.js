@@ -59,6 +59,7 @@ const bloom = new Character({
   klass: "fairy",
   type: "fire",
   image: "./assets/images/bloom.png",
+  imageF: "./assets/images/bloom_fight.png",
   weapon: new Weapon({
     id: "fireBlast",
     name: "Fire Blast",
@@ -75,6 +76,7 @@ const stella = new Character({
   klass: "fairy",
   type: "light",
   image: "./assets/images/stella.png",
+  imageF: "./assets/images/stella_fight.png",
   weapon: new Weapon({
     id: "solarBurst",
     name: "Solar Burst",
@@ -91,6 +93,7 @@ const flora = new Character({
   klass: "fairy",
   type: "nature",
   image: "./assets/images/flora.png",
+  imageF: "./assets/images/flora_fight.png",
   weapon: new Weapon({
     id: "floralWhirlpool",
     name: "Floral Whirlpool",
@@ -107,6 +110,7 @@ const icy = new Character({
   klass: "witch",
   type: "ice",
   image: "./assets/images/icy.png",
+  imageF: "./assets/images/icy_fight.png",
   weapon: new Weapon({
     id: "iceAttack",
     name: "Ice Attack",
@@ -123,6 +127,7 @@ const darcy = new Character({
   klass: "witch",
   type: "darkness",
   image: "./assets/images/darcy.png",
+  imageF: "./assets/images/darcy_fight.png",
   weapon: new Weapon({
     id: "vertigo",
     name: "Vertigo",
@@ -139,6 +144,7 @@ const stormy = new Character({
   klass: "witch",
   type: "storms",
   image: "./assets/images/stormy.png",
+  imageF: "./assets/images/stormy_fight.png",
   weapon: new Weapon({
     id: "lightningFlash",
     name: "Lightning Flash",
