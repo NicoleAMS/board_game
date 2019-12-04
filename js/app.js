@@ -1,24 +1,34 @@
 startGame(grid);
 
 const gameDiv = document.getElementById("game");
-let player;
 let turn = true;
-let startFight = false;
+let fightMode = false;
 
 gameDiv.addEventListener("click", function click(event) {
-  takeTurns(event);
-  if (startFight) {
+  let player = takeTurns(players);
+  onPlayerTurn(player, event);
+  if (fightMode) {
     gameDiv.removeEventListener("click", click);
+    startFight(players);
   }
 });
 
-function takeTurns(event) {
-  if (turn) {
-    player = player1;
+function startFight(players) {
+  consoleLogStats();
+  turn = !turn;
+  let playerA = takeTurns(players);
+  let playerD = players.find(player => {
+    return player.id !== playerA.id;
+  })
+  let playerDHealth = playerA.attack(playerD);
+  if (playerDHealth > 0) {
+    startFight(players);
   } else {
-    player = player2;
+    console.log("Game Over! \n " + playerA.character.name + " won!");
   }
+}
 
+function onPlayerTurn(player, event) {
   player.setSurroundings(directions);
 
   const validTile = player.checkMove(event);
@@ -40,7 +50,7 @@ function takeTurns(event) {
     displayTile(toTileEl, validTile, "");
 
     let directSurroundings = player.setSurroundings(directions, 1);
-    startFight = checkFightMode(directSurroundings) || false;
+    fightMode = checkFightMode(directSurroundings) || false;
 
     turn = !turn;
   }

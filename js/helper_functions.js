@@ -21,3 +21,18 @@ function getPosition(x, y) {
     y: y
   };
 }
+
+function takeTurns(players) {
+  let player;
+  if (turn) {
+    player = players[0];
+  } else {
+    player = players[1];
+  }
+  return player;
+}
+
+function consoleLogStats() {
+	console.log("Player 1: " + players[0].character.name + "\n Health: " + players[0].character.health + "\n Weapon damage: " + players[0].character.weapon.damage);
+  console.log("Player 2: " + players[1].character.name + "\n Health: " + players[1].character.health + "\n Weapon damage: " + players[1].character.weapon.damage);
+}

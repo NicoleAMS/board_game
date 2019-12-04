@@ -59,6 +59,11 @@ class Player {
     grid.removeItem(this);
     grid.addItem(this, toTile);
     this.tile = toTile;
-  }
+	}
+	
+	attack(opponent) {
+		let health = opponent.character.health -= this.character.weapon.damage;
+		return health;
+	}
 }
 
