@@ -162,12 +162,12 @@ const witches = [icy, darcy, stormy];
 // PLAYERS
 
 const player1 = new Player(
-  id = "player1",
+  id = 1,
 	character = fairies[Math.floor(Math.random() * fairies.length)]
 );
 
 const player2 = new Player(
-  id = "player2",
+  id = 2,
 	character = witches[Math.floor(Math.random() * witches.length)]
 );
 

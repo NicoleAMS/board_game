@@ -22,7 +22,7 @@ function getPosition(x, y) {
   };
 }
 
-function takeTurns(players) {
+function takeTurns(turn, players) {
   let player;
   if (turn) {
     player = players[0];

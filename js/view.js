@@ -19,7 +19,7 @@ function startGame(grid) {
 		let freeTiles = grid.getFreeTiles();
 		if (n >= 1) {
 			let player1 = grid.items.find(item => {
-				return item.id === "player1";
+				return item.id === 1;
 			});
 			let directSurroundings = player1.setSurroundings(directions, 1);
 			for (i = 0; i < directSurroundings.length; i++) {
@@ -45,7 +45,7 @@ function displayFight(grid, players) {
 
 	for (let i = 0; i < players.length; i++) {
 		displayPlayer(fightDiv, players[i], i + 1);
-		displayStats(body, players[i], i + 1);
+		displayStats(body, players[i], i + 1, players[i].character.health);
 	}
 };
 
@@ -54,7 +54,11 @@ function displayPlayer(element, player, index) {
 	element.appendChild(playerEl);
 }
 
-function displayStats(element, player, index) {
+function displayStats(element, player, index, health) {
+	if (document.getElementById("wrapper" + index)) {
+		const wrapper = document.getElementById("wrapper" + index);
+		wrapper.parentNode.removeChild(wrapper);
+	}
 	const statsWrapper = createElement("div", "wrapper" + index, ["wrapper"]);
 	const statsDiv = createElement("div", "statPlayer" + index, ["stats"]);
 	const thumb = createElement("img", "imgPlayer" + index, ["statsImg"], player.character.image);
@@ -63,9 +67,11 @@ function displayStats(element, player, index) {
 	const attackBtn = createElement("button", "attackBtn" + index, ["btn", "attackBtn"]);
 	const defendBtn = createElement("button", "defendBtn" + index, ["btn", "defendBtn"]);
 	statsName.innerHTML = "Player " + index + ": " + player.character.name;
-	statsHealth.innerHTML = "Health: " + player.character.health;
+	statsHealth.innerHTML = "Health: " + health;
 	attackBtn.innerHTML = "Attack";
 	defendBtn.innerHTML = "Defend";
+	attackBtn.disabled = true;
+	defendBtn.disabled = true;
 	statsDiv.appendChild(thumb);
 	statsDiv.appendChild(statsName);
 	statsDiv.appendChild(statsHealth);
@@ -78,3 +84,5 @@ function displayStats(element, player, index) {
 		element.prepend(statsWrapper);
 	}
 }
+
+// addEventListeners to displayStats
