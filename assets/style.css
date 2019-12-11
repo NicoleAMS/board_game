@@ -1,5 +1,5 @@
 body {
-  background-color: #E64E90;
+  background-color: hotpink;
   display: flex;
   margin: 0;
 }
@@ -21,7 +21,7 @@ body {
 .tile {
   width: 80px;
   height: 80px;
-  border: 1px solid #E64E90;
+  border: 1px solid hotpink;
 	box-sizing: border-box;
 	display: flex;
 	justify-content: center;

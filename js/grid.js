@@ -61,48 +61,39 @@ class Grid {
     player.character.weapon = newWeapon;
   }
 
-  displayGrid() {
-    const gameCanvas = document.getElementById("game");
-    gameCanvas.style.width = `${grid.gridWidth * 80}px`;
+  createGrid() { // should take weapons, players
+    this.initMap();
   
-    for (let i = 0; i < this.tiles.length; i++) {
-      let tile = this.tiles[i];
-      let id = `${tile.x}_${tile.y}`;
-      let tileDiv = createElement("div", id, ["tile"]);
-      tileDiv = displayTile(tileDiv, tile, "create");
-      gameCanvas.appendChild(tileDiv);
+    // adds obstacles
+    for (let n = 0; n < this.numberOfObstacles; n++) {
+      let freeTiles = this.getFreeTiles();
+      this.addItem(obstacles[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-  }
-
-}
-
-function displayTile(tileEl, tile, action) {
-  let className;
-  let source;
-  let id;
-  // empty tileEl
-  if (tileEl.firstChild) {
-    tileEl.firstChild.remove();
-  } 
-  if (action !== "remove") {
-    for (item in tile.items) {
-      className = tile.items[item].constructor.name.toLowerCase();
-      id = tile.items[item].id;
+  
+    // adds weapons
+    for (let n = 0; n < weapons.length; n++) {
+      let freeTiles = this.getFreeTiles();
+      this.addItem(weapons[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-    if (className) {
-      if (className === "obstacle") {
-        tileEl.style.border = "none";
+  
+    // adds players / characters
+    for (let n = 0; n < players.length; n++) {
+      let freeTiles = this.getFreeTiles();
+      if (n >= 1) {
+        let player1 = this.items.find(item => {
+          return item.id === 1;
+        });
+        let directSurroundings = player1.setSurroundings(directions, 1);
+        for (let i = 0; i < directSurroundings.length; i++) {
+          let tile = freeTiles.find(tile => {
+            return tile.id === directSurroundings[i].id;
+          });
+          let index = freeTiles.indexOf(tile);
+          freeTiles.splice(index, 1);
+        }
       }
-      if (className === "player") {
-        source = tile.items.find(item => {
-          return item instanceof Player;
-        }).character.image;
-      } else {
-        source = tile.items[0].image;
-      }
-      let image = createElement("img", id, [className], source);
-      tileEl.appendChild(image);
+      this.addItem(players[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-  }
-  return tileEl;
+  };
+
 }
