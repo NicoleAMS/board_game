@@ -36,7 +36,7 @@ function startGame(grid) {
   grid.displayGrid();
 };
 
-function displayFight(grid, players) {
+function displayFightScreen(grid, players) {
 	const body = document.getElementsByTagName("body")[0];
 	body.style.backgroundColor = "black";
 	body.removeChild(grid);
@@ -85,4 +85,37 @@ function displayStats(element, player, index, health) {
 	}
 }
 
-// addEventListeners to displayStats
+function setPlayersButtons(playerRoles) {
+	let playerA = playerRoles.attacker;
+	let playerD = playerRoles.defender;
+
+	let playerAttackBtn = document.getElementById(`attackBtn${playerA.id}`);
+  let playerDefendBtn = document.getElementById(`defendBtn${playerA.id}`);
+  let opponentAttackBtn = document.getElementById(`attackBtn${playerD.id}`);
+  let opponentDefendBtn = document.getElementById(`defendBtn${playerD.id}`);
+  playerAttackBtn.disabled = false;
+  playerDefendBtn.disabled = false;
+  opponentAttackBtn.disabled = true;
+	opponentDefendBtn.disabled = true;
+		
+	return {playerAttackBtn: playerAttackBtn, playerDefendBtn: playerDefendBtn};
+}
+
+function displayGameOverScreen(player) {
+	const fightDiv = document.getElementById("fightDiv");
+	const gameOverDiv = createElement("div", "gameOver", ["gameOver"]);
+	gameOverDiv.innerHTML = `
+		<div id="gameOverTextWrapper">
+			<h1 id="gameOverTitle">Game Over</h1>
+			<h3 id="gameOverMsg">${player.character.name} won!</h3>
+		</div>
+		<div id="gameOverBtnWrapper">
+			<button onclick="resetGame()">Play again</button>
+		</div>
+	`;
+	fightDiv.append(gameOverDiv);
+}
+
+function resetGame() {
+
+}

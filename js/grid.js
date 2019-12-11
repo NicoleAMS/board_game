@@ -86,7 +86,6 @@ function displayTile(tileEl, tile, action) {
   } 
   if (action !== "remove") {
     for (item in tile.items) {
-      // console.log(tile.items);
       className = tile.items[item].constructor.name.toLowerCase();
       id = tile.items[item].id;
     }

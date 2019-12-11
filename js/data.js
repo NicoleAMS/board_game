@@ -1,4 +1,4 @@
-const grid = new Grid(10, 10);
+let grid = new Grid(10, 10);
 // let gameMap = [];
 // let freeTiles = [];
 

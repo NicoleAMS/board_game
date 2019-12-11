@@ -63,6 +63,7 @@ class Player {
 	
 	attack(opponent) {
 		let health = opponent.character.health -= this.character.weapon.damage;
+		health = health < 0 ? 0 : health;
 		return health;
 	}
 }
