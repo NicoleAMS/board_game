@@ -1,4 +1,6 @@
-function startGame(grid) {
+const body = document.getElementsByTagName("body")[0];
+
+function createGrid(grid) {
   // initializes the grid
   grid.initMap();
 
@@ -101,7 +103,8 @@ function setPlayersButtons(playerRoles) {
 	return {playerAttackBtn: playerAttackBtn, playerDefendBtn: playerDefendBtn};
 }
 
-function displayGameOverScreen(player) {
+function displayGameOverScreen(player, opponent) {
+	const players = [player, opponent];
 	const fightDiv = document.getElementById("fightDiv");
 	const gameOverDiv = createElement("div", "gameOver", ["gameOver"]);
 	gameOverDiv.innerHTML = `
@@ -110,12 +113,27 @@ function displayGameOverScreen(player) {
 			<h3 id="gameOverMsg">${player.character.name} won!</h3>
 		</div>
 		<div id="gameOverBtnWrapper">
-			<button onclick="resetGame()">Play again</button>
+			<button id="resetBtn">Play again</button>
 		</div>
 	`;
 	fightDiv.append(gameOverDiv);
+
+	const btn = document.getElementById("resetBtn");
+	btn.addEventListener("click", function click() {
+		displayReset();
+		resetGame(players);
+	});
 }
 
-function resetGame() {
-
+function displayReset() {
+	const body = document.getElementsByTagName("body")[0];
+	const wrapper1 = document.getElementById("wrapper1");
+	const wrapper2 = document.getElementById("wrapper2");
+	const fightDiv = document.getElementById("fightDiv");
+	body.removeChild(fightDiv);
+	body.removeChild(wrapper1);
+	body.removeChild(wrapper2);
+	body.style.backgroundColor = "hotpink";
+	const gameDiv = createElement("div", "game", ["gameDiv"]);
+	body.prepend(gameDiv);
 }

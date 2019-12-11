@@ -9,4 +9,9 @@ class Character {
     this.imageF = imageF;
     this.weapon = weapon;
   }
+
+  resetCharacter(weapon) {
+    this.health = 100;
+    this.weapon = weapon;
+  }
 }

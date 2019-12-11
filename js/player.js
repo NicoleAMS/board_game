@@ -4,7 +4,11 @@ class Player {
     this.character = character;
     this.tile = tile;
     this.possibleMoves = [];
-  }
+	}
+	
+	setCharacter(species) {
+		this.character = species[Math.floor(Math.random() * species.length)]
+	}
 
   setSurroundings(directions, steps=3) {
 		this.possibleMoves = [];

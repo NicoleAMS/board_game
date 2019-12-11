@@ -1,6 +1,4 @@
 let grid = new Grid(10, 10);
-// let gameMap = [];
-// let freeTiles = [];
 
 // OBSTACLE
 
@@ -51,6 +49,62 @@ const iceCrystal = new Weapon({
 
 const weapons = [dragonFlame, ringOfSolaria, iceCrystal, lilo];
 
+const fireBlast = new Weapon({
+  id: "fireBlast",
+  name: "Fire Blast",
+  damage: 10,
+  colour: "orange",
+  type: "fire",
+  image: "./assets/images/fire_blast.png"
+});
+
+const solarBurst = new Weapon({
+  id: "solarBurst",
+  name: "Solar Burst",
+  damage: 10,
+  colour: "yellow",
+  type: "light",
+  image: "./assets/images/solar_burst.png"
+});
+
+const floralWhirlpool = new Weapon({
+  id: "floralWhirlpool",
+  name: "Floral Whirlpool",
+  damage: 10,
+  colour: "green",
+  type: "nature",
+  image: "./assets/images/floral_whirlpool.png"
+});
+
+const iceAttack = new Weapon({
+  id: "iceAttack",
+  name: "Ice Attack",
+  damage: 10,
+  colour: "lightblue",
+  type: "ice",
+  image: "./assets/images/ice_attack.png"
+});
+
+const vertigo = new Weapon({
+  id: "vertigo",
+  name: "Vertigo",
+  damage: 10,
+  colour: "purple",
+  type: "darkness",
+  image: "assets/images/vertigo.png"
+});
+
+const lightningFlash = new Weapon({
+  id: "lightningFlash",
+  name: "Lightning Flash",
+  damage: 10,
+  colour: "bordeaux",
+  type: "storms",
+  image: "assets/images/lightning.png"
+});
+
+const defaultWeapons = [fireBlast, solarBurst, floralWhirlpool, iceAttack, vertigo, lightningFlash];
+
 // CHARACTERS
 
 const bloom = new Character({
@@ -60,14 +114,7 @@ const bloom = new Character({
   type: "fire",
   image: "./assets/images/bloom.png",
   imageF: "./assets/images/bloom_fight.png",
-  weapon: new Weapon({
-    id: "fireBlast",
-    name: "Fire Blast",
-    damage: 10,
-    colour: "orange",
-    type: "fire",
-    image: "./assets/images/fire_blast.png"
-  })
+  weapon: fireBlast
 });
 
 const stella = new Character({
@@ -77,14 +124,7 @@ const stella = new Character({
   type: "light",
   image: "./assets/images/stella.png",
   imageF: "./assets/images/stella_fight.png",
-  weapon: new Weapon({
-    id: "solarBurst",
-    name: "Solar Burst",
-    damage: 10,
-    colour: "yellow",
-    type: "light",
-    image: "./assets/images/solar_burst.png"
-  })
+  weapon: solarBurst
 });
 
 const flora = new Character({
@@ -94,14 +134,7 @@ const flora = new Character({
   type: "nature",
   image: "./assets/images/flora.png",
   imageF: "./assets/images/flora_fight.png",
-  weapon: new Weapon({
-    id: "floralWhirlpool",
-    name: "Floral Whirlpool",
-    damage: 10,
-    colour: "green",
-    type: "nature",
-    image: "./assets/images/floral_whirlpool.png"
-  })
+  weapon: floralWhirlpool
 });
 
 const icy = new Character({
@@ -111,14 +144,7 @@ const icy = new Character({
   type: "ice",
   image: "./assets/images/icy.png",
   imageF: "./assets/images/icy_fight.png",
-  weapon: new Weapon({
-    id: "iceAttack",
-    name: "Ice Attack",
-    damage: 10,
-    colour: "lightblue",
-    type: "ice",
-    image: "./assets/images/ice_attack.png"
-  })
+  weapon: iceAttack
 });
 
 const darcy = new Character({
@@ -128,14 +154,7 @@ const darcy = new Character({
   type: "darkness",
   image: "./assets/images/darcy.png",
   imageF: "./assets/images/darcy_fight.png",
-  weapon: new Weapon({
-    id: "vertigo",
-    name: "Vertigo",
-    damage: 10,
-    colour: "purple",
-    type: "darkness",
-    image: "assets/images/vertigo.png"
-  })
+  weapon: vertigo
 });
 
 const stormy = new Character({
@@ -145,14 +164,7 @@ const stormy = new Character({
   type: "storms",
   image: "./assets/images/stormy.png",
   imageF: "./assets/images/stormy_fight.png",
-  weapon: new Weapon({
-    id: "lightningFlash",
-    name: "Lightning Flash",
-    damage: 10,
-    colour: "bordeaux",
-    type: "storms",
-    image: "assets/images/lightning.png"
-  })
+  weapon: lightningFlash
 });
 
 const fairies = [bloom, stella, flora];
@@ -161,15 +173,9 @@ const witches = [icy, darcy, stormy];
 
 // PLAYERS
 
-const player1 = new Player(
-  id = 1,
-	character = fairies[Math.floor(Math.random() * fairies.length)]
-);
+const player1 = new Player(id = 1);
 
-const player2 = new Player(
-  id = 2,
-	character = witches[Math.floor(Math.random() * witches.length)]
-);
+const player2 = new Player(id = 2);
 
 const players = [player1, player2];
 
