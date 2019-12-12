@@ -1,16 +1,17 @@
-const body = document.getElementsByTagName("body")[0];
+const body = $(document.body);
 
 // GRID VIEW
 function displayGrid(grid) {
-  const gameCanvas = document.getElementById("game");
-  gameCanvas.style.width = `${grid.gridWidth * 80}px`;
+	
+	$("#game").css("width", `${grid.gridWidth * 80}px`);
 
   for (let i = 0; i < grid.tiles.length; i++) {
     let tile = grid.tiles[i];
-    let id = `${tile.x}_${tile.y}`;
-    let tileDiv = createElement("div", id, ["tile"]);
-    tileDiv = displayTile(tileDiv, tile, "create");
-    gameCanvas.appendChild(tileDiv);
+		let id = `${tile.x}_${tile.y}`;
+		let $tileDiv = $(`<div id="${id}" class="tile"></div>`);
+    // let tileDiv = createElement("div", id, ["tile"]);
+    $tileDiv = displayTile($tileDiv, tile, "create");
+    $("#game").append($tileDiv);
   }
 }
 
@@ -29,7 +30,8 @@ function displayTile(tileEl, tile, action) {
     }
     if (className) {
       if (className === "obstacle") {
-        tileEl.style.border = "none";
+				// tileEl.style.border = "none";
+				tileEl.css("border", "none");
       }
       if (className === "player") {
         source = tile.items.find(item => {
@@ -37,133 +39,111 @@ function displayTile(tileEl, tile, action) {
         }).character.image;
       } else {
         source = tile.items[0].image;
-      }
-      let image = createElement("img", id, [className], source);
-      tileEl.appendChild(image);
+			}
+			$(`<img id="${id}" class="${className}" src="${source}">`).appendTo(tileEl);
+      // let image = createElement("img", id, [className], source);
+      // tileEl.append(image);
     }
   }
   return tileEl;
 }
 
 // FIGHT VIEW
-function displayFightScreen(grid, players) {
-  const body = document.getElementsByTagName("body")[0];
-  body.style.backgroundColor = "black";
-  body.removeChild(grid);
-  const fightDiv = createElement("div", "fightDiv", [], "");
-  body.prepend(fightDiv);
+function displayFightScreen(players) {
+	const $body = $(document.body);
+	$body.css("backgroundColor", "black");
+	$("#game").remove();
+
+	// const fightDiv = createElement("div", "fightDiv", [], "");
+	const $fightDiv = $(`<div id="fightDiv"></div>`);
+  $body.prepend($fightDiv);
 
   for (let i = 0; i < players.length; i++) {
-    displayPlayer(fightDiv, players[i], i + 1);
-    displayStats(body, players[i], i + 1, players[i].character.health);
+    displayPlayer($fightDiv, players[i], i + 1);
+    displayStats($body, players[i], i + 1, players[i].character.health);
   }
 }
 
 function displayPlayer(element, player, index) {
-  const playerEl = createElement(
-    "img",
-    "player" + index,
-    ["playerF"],
-    player.character.imageF
-  );
-  element.appendChild(playerEl);
+  // const playerEl = createElement("img", "player" + index, ["playerF"], player.character.imageF);
+	const $playerEl = $(`<img id="player${index}" class="playerF" src="${player.character.imageF}">`);
+	element.append($playerEl);
 }
 
 function displayStats(element, player, index, health) {
-  if (document.getElementById("wrapper" + index)) {
-    const wrapper = document.getElementById("wrapper" + index);
-    wrapper.parentNode.removeChild(wrapper);
-  }
-  const statsWrapper = createElement("div", "wrapper" + index, ["wrapper"]);
-  const statsDiv = createElement("div", "statPlayer" + index, ["stats"]);
-  const thumb = createElement(
-    "img",
-    "imgPlayer" + index,
-    ["statsImg"],
-    player.character.image
-  );
-  const statsName = createElement("h3", "player" + index + "Name", [
-    "statsName"
-  ]);
-  const statsHealth = createElement("p", "player" + index + "Health", [
-    "statsHealth"
-  ]);
-  const attackBtn = createElement("button", "attackBtn" + index, [
-    "btn",
-    "attackBtn"
-  ]);
-  const defendBtn = createElement("button", "defendBtn" + index, [
-    "btn",
-    "defendBtn"
-  ]);
-  statsName.innerHTML = "Player " + index + ": " + player.character.name;
-  statsHealth.innerHTML = "Health: " + health;
-  attackBtn.innerHTML = "Attack";
-  defendBtn.innerHTML = "Defend";
-  attackBtn.disabled = true;
-  defendBtn.disabled = true;
-  statsDiv.appendChild(thumb);
-  statsDiv.appendChild(statsName);
-  statsDiv.appendChild(statsHealth);
-  statsDiv.appendChild(attackBtn);
-  statsDiv.appendChild(defendBtn);
-  statsWrapper.appendChild(statsDiv);
+	if ($("#wrapper" + index)) {
+    $("#wrapper" + index).remove();
+	}
+	const $statsWrapper = $(`
+		<div id="wrapper${index}" class="wrapper">
+			<div id="statPlayer${index}" class="stats">
+				<img id="imgPlayer${index}" class="statsImg" src="${player.character.image}">
+				<h3 id="player${index}Name" class="statsName">
+					Player ${index}:  ${player.character.name}
+				</h3>
+				<p id="player${index}Health" class="statsHealth">
+					Health:  ${health}
+				</p>
+				<button id="attackBtn${index}" class="btn attackBtn">Attack</button>
+				<button id="defendBtn${index}" class="btn defendBtn">Defend</button>
+			</div>
+		</div>
+	`);
   if (index % 2 === 0) {
-    element.appendChild(statsWrapper);
+    element.append($statsWrapper);
   } else {
-    element.prepend(statsWrapper);
+    element.prepend($statsWrapper);
   }
 }
 
 function setPlayersButtons(playerRoles) {
   let playerA = playerRoles.attacker;
-  let playerD = playerRoles.defender;
+	let playerD = playerRoles.defender;
+	
+	let $playerAttackBtn = $(`#attackBtn${playerA.id}`);
+	let $playerDefendBtn = $(`#defendBtn${playerA.id}`);
+	let $opponentAttackBtn = $(`#attackBtn${playerD.id}`);
+	let $opponentDefendBtn = $(`#defendBtn${playerD.id}`);
 
-  let playerAttackBtn = document.getElementById(`attackBtn${playerA.id}`);
-  let playerDefendBtn = document.getElementById(`defendBtn${playerA.id}`);
-  let opponentAttackBtn = document.getElementById(`attackBtn${playerD.id}`);
-  let opponentDefendBtn = document.getElementById(`defendBtn${playerD.id}`);
-  playerAttackBtn.disabled = false;
-  playerDefendBtn.disabled = false;
-  opponentAttackBtn.disabled = true;
-  opponentDefendBtn.disabled = true;
+  $opponentAttackBtn.attr("disabled", true);
+  $opponentDefendBtn.attr("disabled", true);
 
-  return { playerAttackBtn: playerAttackBtn, playerDefendBtn: playerDefendBtn };
+  return { playerAttackBtn: $playerAttackBtn, playerDefendBtn: $playerDefendBtn };
 }
 
 // GAME OVER VIEW
 function displayGameOverScreen(player, opponent) {
   const players = [player, opponent];
-  const fightDiv = document.getElementById("fightDiv");
-  const gameOverDiv = createElement("div", "gameOver", ["gameOver"]);
-  gameOverDiv.innerHTML = `
-		<div id="gameOverTextWrapper">
-			<h1 id="gameOverTitle">Game Over</h1>
-			<h3 id="gameOverMsg">${player.character.name} won!</h3>
-		</div>
-		<div id="gameOverBtnWrapper">
-			<button id="resetBtn">Play again</button>
-		</div>
-	`;
-  fightDiv.append(gameOverDiv);
+	const $fightDiv = $("#fightDiv");
+	const $gameOverDiv = $(
+		`<div id="gameOver" class="gameOver">
+			<div id="gameOverTextWrapper">
+				<h1 id="gameOverTitle">Game Over</h1>
+				<h3 id="gameOverMsg">${player.character.name} won!</h3>
+			</div>
+			<div id="gameOverBtnWrapper">
+				<button id="resetBtn">Play again</button>
+			</div>
+		</div>`
+	);
+  $fightDiv.append($gameOverDiv);
 
-  const btn = document.getElementById("resetBtn");
-  btn.addEventListener("click", function click() {
+  $("#resetBtn").on("click", function click() {
     displayReset();
     resetGame(players);
   });
 }
 
 // RESET VIEW TO GRID
-function displayReset() {
-  const body = document.getElementsByTagName("body")[0];
-  const wrapper1 = document.getElementById("wrapper1");
-  const wrapper2 = document.getElementById("wrapper2");
-  const fightDiv = document.getElementById("fightDiv");
-  body.removeChild(fightDiv);
-  body.removeChild(wrapper1);
-  body.removeChild(wrapper2);
-  body.style.backgroundColor = "hotpink";
-  const gameDiv = createElement("div", "game", ["gameDiv"]);
-  body.prepend(gameDiv);
+function displayReset() {	
+	$body = $(document.body);
+	$body.css("backgroundColor", "hotpink");
+	// body.style.backgroundColor = "hotpink";
+	$("#wrapper1").remove();
+	$("#wrapper2").remove();
+	$("#fightDiv").remove();
+
+	const $gameDiv = $(`<div id="game" class="gameDiv"></div>`);
+  // const gameDiv = createElement("div", "game", ["gameDiv"]);
+  body.prepend($gameDiv);
 }

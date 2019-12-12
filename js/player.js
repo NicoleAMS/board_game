@@ -41,13 +41,13 @@ class Player {
 		return surroundings;
   }
 
-  checkMove(event) {
+  checkMove($event) {
     let tile;
     let validMove = false;
     for (let n = 0; n < this.possibleMoves.length; n++) {
       tile = this.possibleMoves[n];
       // check the element's id or (if img with weapon) the parent's id
-      if (tile.id === event.target.id || tile.id === event.path[1].id) {
+      if (tile.id === $event.target.id || tile.id === $event.target.parentNode.id) {
         validMove = true;
         break;
       } else {

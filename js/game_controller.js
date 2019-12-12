@@ -10,26 +10,27 @@ function playGame() {
   grid.createGrid(); // view.js
   displayGrid(grid);
 
-  const gameDiv = document.getElementById("game");
+	// const gameDiv = document.getElementById("game");
 
-  gameDiv.addEventListener("click", function click(event) {
+  $("#game").on("click", function click($event) {
     let player = takeTurns(turn, players); // helper_functions.js
-    onPlayerTurn(player, event); // app.js
+    onPlayerTurn(player, $event); // app.js
     if (fightMode) {
-      displayFightScreen(gameDiv, players); // view.js
+      displayFightScreen(players); // view.js
       startFight(players); // app.js
     }
   });
 }
 
-function onPlayerTurn(player, event) {
+function onPlayerTurn(player, $event) {
 	player.setSurroundings(directions);
 
-	const validTile = player.checkMove(event);
+	const validTile = player.checkMove($event);
 	if (validTile) {
 		if (validTile.items[0] instanceof Weapon) {
 			grid.swapWeapons(validTile, player);
 		}
+		
 		const fromTileEl = document.getElementById(`${player.tile.id}`);
 		const toTileEl = document.getElementById(`${validTile.id}`);
 
@@ -80,24 +81,24 @@ function setPlayersRoles(players) {
 	return { attacker: playerA, defender: playerD };
 }
 
-function fight(playerA, playerD, playerAttackBtn, playerDefendBtn) {
-	playerAttackBtn.addEventListener("click", function clickAttack() {
+function fight(playerA, playerD, $playerAttackBtn, $playerDefendBtn) {
+	$playerAttackBtn.on("click", function clickAttack() {
 		playerD.character.health = playerA.attack(playerD);
 		displayStats(body, playerD, playerD.id, playerD.character.health);
 		if (playerD.character.health > 0) {
 			startFight(players);
 		} else {
-			playerAttackBtn.disabled = true;
-			playerDefendBtn.disabled = true;
+			$playerAttackBtn.disabled = true;
+			$playerDefendBtn.disabled = true;
 			displayGameOverScreen(playerA, playerD);
 		}
-		playerAttackBtn.removeEventListener("click", clickAttack);
+		$playerAttackBtn.off("click", clickAttack);
 	});
 
-	playerDefendBtn.addEventListener("click", function clickDefend() {
+	$playerDefendBtn.on("click", function clickDefend() {
 		playerA.character.health += playerD.character.weapon.damage / 2;
 		startFight(players);
-		playerDefendBtn.removeEventListener("click", clickDefend);
+		$playerDefendBtn.off("click", clickDefend);
 	});
 }
 
