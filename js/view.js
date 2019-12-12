@@ -2,13 +2,12 @@ const body = $(document.body);
 
 // GRID VIEW
 function displayGrid(grid) {
-	
-	$("#game").css("width", `${grid.gridWidth * 80}px`);
+  $("#game").css("width", `${grid.gridWidth * 80}px`);
 
   for (let i = 0; i < grid.tiles.length; i++) {
     let tile = grid.tiles[i];
-		let id = `${tile.x}_${tile.y}`;
-		let $tileDiv = $(`<div id="${id}" class="tile"></div>`);
+    let id = `${tile.x}_${tile.y}`;
+    let $tileDiv = $(`<div id="${id}" class="tile"></div>`);
     // let tileDiv = createElement("div", id, ["tile"]);
     $tileDiv = displayTile($tileDiv, tile, "create");
     $("#game").append($tileDiv);
@@ -30,8 +29,8 @@ function displayTile(tileEl, tile, action) {
     }
     if (className) {
       if (className === "obstacle") {
-				// tileEl.style.border = "none";
-				tileEl.css("border", "none");
+        // tileEl.style.border = "none";
+        tileEl.css("border", "none");
       }
       if (className === "player") {
         source = tile.items.find(item => {
@@ -39,8 +38,10 @@ function displayTile(tileEl, tile, action) {
         }).character.image;
       } else {
         source = tile.items[0].image;
-			}
-			$(`<img id="${id}" class="${className}" src="${source}">`).appendTo(tileEl);
+      }
+      $(`<img id="${id}" class="${className}" src="${source}">`).appendTo(
+        tileEl
+      );
       // let image = createElement("img", id, [className], source);
       // tileEl.append(image);
     }
@@ -50,12 +51,12 @@ function displayTile(tileEl, tile, action) {
 
 // FIGHT VIEW
 function displayFightScreen(players) {
-	const $body = $(document.body);
-	$body.css("backgroundColor", "black");
-	$("#game").remove();
+  const $body = $(document.body);
+  $body.css("backgroundColor", "black");
+  $("#game").remove();
 
-	// const fightDiv = createElement("div", "fightDiv", [], "");
-	const $fightDiv = $(`<div id="fightDiv"></div>`);
+  // const fightDiv = createElement("div", "fightDiv", [], "");
+  const $fightDiv = $(`<div id="fightDiv"></div>`);
   $body.prepend($fightDiv);
 
   for (let i = 0; i < players.length; i++) {
@@ -66,15 +67,17 @@ function displayFightScreen(players) {
 
 function displayPlayer(element, player, index) {
   // const playerEl = createElement("img", "player" + index, ["playerF"], player.character.imageF);
-	const $playerEl = $(`<img id="player${index}" class="playerF" src="${player.character.imageF}">`);
-	element.append($playerEl);
+  const $playerEl = $(
+    `<img id="player${index}" class="playerF" src="${player.character.imageF}">`
+  );
+  element.append($playerEl);
 }
 
 function displayStats(element, player, index, health) {
-	if ($("#wrapper" + index)) {
+  if ($("#wrapper" + index)) {
     $("#wrapper" + index).remove();
-	}
-	const $statsWrapper = $(`
+  }
+  const $statsWrapper = $(`
 		<div id="wrapper${index}" class="wrapper">
 			<div id="statPlayer${index}" class="stats">
 				<img id="imgPlayer${index}" class="statsImg" src="${player.character.image}">
@@ -98,25 +101,28 @@ function displayStats(element, player, index, health) {
 
 function setPlayersButtons(playerRoles) {
   let playerA = playerRoles.attacker;
-	let playerD = playerRoles.defender;
-	
-	let $playerAttackBtn = $(`#attackBtn${playerA.id}`);
-	let $playerDefendBtn = $(`#defendBtn${playerA.id}`);
-	let $opponentAttackBtn = $(`#attackBtn${playerD.id}`);
-	let $opponentDefendBtn = $(`#defendBtn${playerD.id}`);
+  let playerD = playerRoles.defender;
+
+  let $playerAttackBtn = $(`#attackBtn${playerA.id}`);
+  let $playerDefendBtn = $(`#defendBtn${playerA.id}`);
+  let $opponentAttackBtn = $(`#attackBtn${playerD.id}`);
+  let $opponentDefendBtn = $(`#defendBtn${playerD.id}`);
 
   $opponentAttackBtn.attr("disabled", true);
   $opponentDefendBtn.attr("disabled", true);
 
-  return { playerAttackBtn: $playerAttackBtn, playerDefendBtn: $playerDefendBtn };
+  return {
+    playerAttackBtn: $playerAttackBtn,
+    playerDefendBtn: $playerDefendBtn
+  };
 }
 
 // GAME OVER VIEW
 function displayGameOverScreen(player, opponent) {
   const players = [player, opponent];
-	const $fightDiv = $("#fightDiv");
-	const $gameOverDiv = $(
-		`<div id="gameOver" class="gameOver">
+  const $fightDiv = $("#fightDiv");
+  const $gameOverDiv = $(
+    `<div id="gameOver" class="gameOver">
 			<div id="gameOverTextWrapper">
 				<h1 id="gameOverTitle">Game Over</h1>
 				<h3 id="gameOverMsg">${player.character.name} won!</h3>
@@ -125,7 +131,7 @@ function displayGameOverScreen(player, opponent) {
 				<button id="resetBtn">Play again</button>
 			</div>
 		</div>`
-	);
+  );
   $fightDiv.append($gameOverDiv);
 
   $("#resetBtn").on("click", function click() {
@@ -135,15 +141,15 @@ function displayGameOverScreen(player, opponent) {
 }
 
 // RESET VIEW TO GRID
-function displayReset() {	
-	$body = $(document.body);
-	$body.css("backgroundColor", "hotpink");
-	// body.style.backgroundColor = "hotpink";
-	$("#wrapper1").remove();
-	$("#wrapper2").remove();
-	$("#fightDiv").remove();
+function displayReset() {
+  $body = $(document.body);
+  $body.css("backgroundColor", "hotpink");
+  // body.style.backgroundColor = "hotpink";
+  $("#wrapper1").remove();
+  $("#wrapper2").remove();
+  $("#fightDiv").remove();
 
-	const $gameDiv = $(`<div id="game" class="gameDiv"></div>`);
+  const $gameDiv = $(`<div id="game" class="gameDiv"></div>`);
   // const gameDiv = createElement("div", "game", ["gameDiv"]);
   body.prepend($gameDiv);
 }

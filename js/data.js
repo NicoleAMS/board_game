@@ -5,8 +5,8 @@ let grid = new Grid(10, 10);
 let obstacles = [];
 for (let n = 0; n < grid.numberOfObstacles; n++) {
   const obstacle = new Obstacle(
-    id = "obstacle" + n,
-    image = "./assets/images/rock.png"
+    (id = "obstacle" + n),
+    (image = "./assets/images/rock.png")
   );
   obstacles.push(obstacle);
 }
@@ -103,7 +103,14 @@ const lightningFlash = new Weapon({
   image: "assets/images/lightning.png"
 });
 
-const defaultWeapons = [fireBlast, solarBurst, floralWhirlpool, iceAttack, vertigo, lightningFlash];
+const defaultWeapons = [
+  fireBlast,
+  solarBurst,
+  floralWhirlpool,
+  iceAttack,
+  vertigo,
+  lightningFlash
+];
 
 // CHARACTERS
 
@@ -170,17 +177,15 @@ const stormy = new Character({
 const fairies = [bloom, stella, flora];
 const witches = [icy, darcy, stormy];
 
-
 // PLAYERS
 
-const player1 = new Player(id = 1);
+const player1 = new Player((id = 1));
 
-const player2 = new Player(id = 2);
+const player2 = new Player((id = 2));
 
 const players = [player1, player2];
 
-
-// DIRECTIONS 
+// DIRECTIONS
 
 const directions = {
   n: {

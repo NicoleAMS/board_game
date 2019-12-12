@@ -4,5 +4,4 @@ class Obstacle {
     this.image = image;
     this.tile = tile;
   }
-} 
-
+}

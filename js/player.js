@@ -4,20 +4,20 @@ class Player {
     this.character = character;
     this.tile = tile;
     this.possibleMoves = [];
-	}
-	
-	setCharacter(species) {
-		this.character = species[Math.floor(Math.random() * species.length)]
-	}
+  }
 
-  setSurroundings(directions, steps=3) {
-		this.possibleMoves = [];
-		let surroundings = [];
+  setCharacter(species) {
+    this.character = species[Math.floor(Math.random() * species.length)];
+  }
+
+  setSurroundings(directions, steps = 3) {
+    this.possibleMoves = [];
+    let surroundings = [];
     for (const dir in directions) {
       let currentPosition = getPosition(this.tile.x, this.tile.y);
       let nextPosition;
-			let tile;
-			let tileID;
+      let tile;
+      let tileID;
       for (let n = 0; n < steps; n++) {
         nextPosition = getPosition(
           currentPosition.x + directions[dir].x,
@@ -26,10 +26,10 @@ class Player {
         tileID = nextPosition.x + "_" + nextPosition.y;
         tile = grid.tiles.find(tile => {
           return tile.id === tileID;
-				});
-				if (tile !== undefined) {
-					surroundings.push(tile);
-				}
+        });
+        if (tile !== undefined) {
+          surroundings.push(tile);
+        }
         if (tile !== undefined && !tile.blocked) {
           this.possibleMoves.push(tile);
         } else {
@@ -37,8 +37,8 @@ class Player {
         }
         currentPosition = nextPosition;
       }
-		}
-		return surroundings;
+    }
+    return surroundings;
   }
 
   checkMove($event) {
@@ -47,7 +47,10 @@ class Player {
     for (let n = 0; n < this.possibleMoves.length; n++) {
       tile = this.possibleMoves[n];
       // check the element's id or (if img with weapon) the parent's id
-      if (tile.id === $event.target.id || tile.id === $event.target.parentNode.id) {
+      if (
+        tile.id === $event.target.id ||
+        tile.id === $event.target.parentNode.id
+      ) {
         validMove = true;
         break;
       } else {
@@ -63,12 +66,11 @@ class Player {
     grid.removeItem(this);
     grid.addItem(this, toTile);
     this.tile = toTile;
-	}
-	
-	attack(opponent) {
-		let health = opponent.character.health -= this.character.weapon.damage;
-		health = health < 0 ? 0 : health;
-		return health;
-	}
-}
+  }
 
+  attack(opponent) {
+    let health = (opponent.character.health -= this.character.weapon.damage);
+    health = health < 0 ? 0 : health;
+    return health;
+  }
+}

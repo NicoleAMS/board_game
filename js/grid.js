@@ -61,21 +61,22 @@ class Grid {
     player.character.weapon = newWeapon;
   }
 
-  createGrid() { // should take weapons, players
+  createGrid() {
+    // should take weapons, players
     this.initMap();
-  
+
     // adds obstacles
     for (let n = 0; n < this.numberOfObstacles; n++) {
       let freeTiles = this.getFreeTiles();
       this.addItem(obstacles[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-  
+
     // adds weapons
     for (let n = 0; n < weapons.length; n++) {
       let freeTiles = this.getFreeTiles();
       this.addItem(weapons[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-  
+
     // adds players / characters
     for (let n = 0; n < players.length; n++) {
       let freeTiles = this.getFreeTiles();
@@ -94,6 +95,5 @@ class Grid {
       }
       this.addItem(players[n], freeTiles[getRandomIndex(freeTiles)]);
     }
-  };
-
+  }
 }
