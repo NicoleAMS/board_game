@@ -3,6 +3,7 @@ let fightMode = false;
 
 function playGame() {
   // should take players, grid
+  console.log(fightMode);
 
   player1.setCharacter(fairies);
   player2.setCharacter(witches);
@@ -53,9 +54,12 @@ function onPlayerTurn(player, $event) {
 
 function checkFightMode(surroundings) {
   for (i = 0; i < surroundings.length; i++) {
-    if (surroundings[i].items.length > 0) {
-      if (surroundings[i].items[0] instanceof Player) {
-        return true;
+    let numberOfItems = surroundings[i].items.length;
+    if (numberOfItems > 0) {
+      for (n = 0; n < numberOfItems; n++) {
+        if (surroundings[i].items[n] instanceof Player) {
+          return true;
+        }
       }
     }
   }
@@ -103,9 +107,6 @@ function fight(playerA, playerD, $playerAttackBtn, $playerDefendBtn) {
 }
 
 function resetGame(players) {
-  // should take grid
-  grid = new Grid();
-
   // reset characters
   for (i = 0; i < players.length; i++) {
     let weapon = defaultWeapons.find(weapon => {
@@ -113,6 +114,9 @@ function resetGame(players) {
     });
     players[i].character.resetCharacter(weapon);
   }
+
+  grid = new Grid();
+  fightMode = false;
 
   playGame();
 }
