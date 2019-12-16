@@ -29,7 +29,6 @@ function displayTile(tileEl, tile, action) {
     }
     if (className) {
       if (className === "obstacle") {
-        // tileEl.style.border = "none";
         tileEl.css("border", "none");
       }
       if (className === "player") {
@@ -42,8 +41,6 @@ function displayTile(tileEl, tile, action) {
       $(`<img id="${id}" class="${className}" src="${source}">`).appendTo(
         tileEl
       );
-      // let image = createElement("img", id, [className], source);
-      // tileEl.append(image);
     }
   }
   return tileEl;
@@ -55,7 +52,6 @@ function displayFightScreen(players) {
   $body.css("backgroundColor", "black");
   $("#game").remove();
 
-  // const fightDiv = createElement("div", "fightDiv", [], "");
   const $fightDiv = $(`<div id="fightDiv"></div>`);
   $body.prepend($fightDiv);
 
@@ -66,7 +62,6 @@ function displayFightScreen(players) {
 }
 
 function displayPlayer(element, player, index) {
-  // const playerEl = createElement("img", "player" + index, ["playerF"], player.character.imageF);
   const $playerEl = $(
     `<img id="player${index}" class="playerF" src="${player.character.imageF}">`
   );
@@ -144,12 +139,10 @@ function displayGameOverScreen(player, opponent) {
 function displayReset() {
   $body = $(document.body);
   $body.css("backgroundColor", "hotpink");
-  // body.style.backgroundColor = "hotpink";
   $("#wrapper1").remove();
   $("#wrapper2").remove();
   $("#fightDiv").remove();
 
   const $gameDiv = $(`<div id="game" class="gameDiv"></div>`);
-  // const gameDiv = createElement("div", "game", ["gameDiv"]);
   body.prepend($gameDiv);
 }

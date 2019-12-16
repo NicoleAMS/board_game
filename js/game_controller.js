@@ -3,7 +3,6 @@ let fightMode = false;
 
 function playGame() {
   // should take players, grid
-  console.log(fightMode);
 
   player1.setCharacter(fairies);
   player2.setCharacter(witches);
@@ -11,14 +10,12 @@ function playGame() {
   grid.createGrid(); // view.js
   displayGrid(grid);
 
-  // const gameDiv = document.getElementById("game");
-
   $("#game").on("click", function click($event) {
     let player = takeTurns(turn, players); // helper_functions.js
-    onPlayerTurn(player, $event); // app.js
+    onPlayerTurn(player, $event); // game_controller.js
     if (fightMode) {
       displayFightScreen(players); // view.js
-      startFight(players); // app.js
+      startFight(players); // game_controller.js
     }
   });
 }
@@ -46,7 +43,7 @@ function onPlayerTurn(player, $event) {
     displayTile(toTileEl, validTile, "");
 
     let directSurroundings = player.setSurroundings(directions, 1);
-    fightMode = checkFightMode(directSurroundings) || false; // app.js
+    fightMode = checkFightMode(directSurroundings) || false; // game_controller.js
 
     turn = !turn;
   }
@@ -66,14 +63,14 @@ function checkFightMode(surroundings) {
 }
 
 function startFight(players) {
-  const playerRoles = setPlayersRoles(players); // app.js
+  const playerRoles = setPlayersRoles(players); // game_controller.js
   const buttons = setPlayersButtons(playerRoles); //view.js
   fight(
     playerRoles.attacker,
     playerRoles.defender,
     buttons.playerAttackBtn,
     buttons.playerDefendBtn
-  ); // app.js
+  ); // game_controller.js
 }
 
 function setPlayersRoles(players) {
@@ -117,6 +114,7 @@ function resetGame(players) {
 
   grid = new Grid();
   fightMode = false;
+  turn = true;
 
   playGame();
 }
