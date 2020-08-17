@@ -103,6 +103,8 @@ function setPlayersButtons(playerRoles) {
   let $opponentAttackBtn = $(`#attackBtn${playerD.id}`);
   let $opponentDefendBtn = $(`#defendBtn${playerD.id}`);
 
+  $playerAttackBtn.attr("disabled", false);
+  $playerDefendBtn.attr("disabled", false);
   $opponentAttackBtn.attr("disabled", true);
   $opponentDefendBtn.attr("disabled", true);
 
